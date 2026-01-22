@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imagine Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,60 +13,316 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(180deg, #4A90E2 0%, #7CB9E8 100%);
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #7c5ce0 0%, #9c5bb5 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-x: hidden;
         }
 
+        /* Floating gradient orbs */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .orbs-container {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: -50%;
+            top: -50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(48px);
+        }
+
+        .orb-1 { width: 384px; height: 384px; background: rgba(255,255,255,0.1); top: 20%; left: 20%; }
+        .orb-2 { width: 320px; height: 320px; background: rgba(255,255,255,0.15); top: 70%; left: 80%; }
+        .orb-3 { width: 256px; height: 256px; background: rgba(255,182,193,0.2); top: 80%; left: 40%; }
+        .orb-4 { width: 288px; height: 288px; background: rgba(255,255,0,0.15); top: 20%; left: 60%; }
+
+        /* Twinkling stars */
+        .stars-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        /* Phone container */
         .phone-container {
             width: 100%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 30px 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 2rem;
+            padding: 1.25rem;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            border: 4px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 10;
         }
 
+        @media (min-width: 640px) {
+            .phone-container { padding: 1.5rem; }
+        }
+
+        /* Header */
         .header {
-            background: linear-gradient(135deg, #2E5CB8 0%, #4A7BC8 100%);
+            background: linear-gradient(135deg, #3b5998 0%, #5a7fc2 100%);
             color: white;
-            padding: 15px 20px;
-            border-radius: 15px;
+            padding: 0.75rem 2.5rem;
+            border-radius: 0.75rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between ;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .header { padding: 1rem 1.25rem; border-radius: 1rem; margin-bottom: 1.5rem; }
+        }
+
+        .header-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .header-icon { width: 1.75rem; height: 1.75rem; }
         }
 
         .header-title {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .header-title { font-size: 1.5rem; }
         }
 
         .menu-icon {
-            font-size: 28px;
             cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .home-icon {
-            font-size: 28px;
+        .menu-icon:hover {
+            transform: scale(1.1);
         }
 
+        /* Profile section */
         .profile-section {
             background: linear-gradient(180deg, #5BA3E8 0%, #89C4F4 100%);
-            border-radius: 25px;
-            padding: 40px 30px;
+            padding: 2rem 1.25rem;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
+        @media (min-width: 640px) {
+            .profile-section { padding: 2.5rem 2rem; }
+        }
+
+        /* Animated bubbles */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .bubble-1 { width: 80px; height: 80px; background: rgba(255,255,255,0.1); top: -20px; left: -20px; animation: bubble-1 6s ease-in-out infinite; }
+        .bubble-2 { width: 64px; height: 64px; background: rgba(255,255,255,0.15); top: 25%; right: -16px; animation: bubble-2 8s ease-in-out infinite; }
+        .bubble-3 { width: 48px; height: 48px; background: rgba(255,255,0,0.2); bottom: 40px; left: 40px; animation: bubble-3 5s ease-in-out infinite; }
+        .bubble-4 { width: 96px; height: 96px; background: rgba(255,182,193,0.1); bottom: -32px; right: 25%; animation: bubble-1 6s ease-in-out infinite; }
+        .bubble-5 { width: 32px; height: 32px; background: rgba(255,255,255,0.2); top: 33%; left: 25%; animation: bubble-2 8s ease-in-out infinite; }
+
+        .sparkle {
+            position: absolute;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .sparkle-1 { top: 32px; right: 32px; font-size: 1.25rem; }
+        .sparkle-2 { bottom: 80px; left: 24px; font-size: 1rem; animation-delay: 0.5s; }
+        .sparkle-3 { top: 50%; right: 24px; font-size: 0.875rem; }
+
+        /* Avatar */
+        .profile-avatar {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            margin: 0 auto 1rem;
+            animation: bounce-slow 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 640px) {
+            .profile-avatar { width: 10rem; height: 10rem; border-width: 8px; font-size: 4.5rem; }
+        }
+
+        .greeting {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 640px) {
+            .greeting { font-size: 1.25rem; }
+        }
+
+        .balance-container {
+            animation: pulse-glow 2s ease-in-out infinite;
+            border-radius: 1rem;
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .balance-display {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #FFE66D;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            margin: 0.75rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .balance-display { font-size: 3.75rem; }
+        }
+
+        @media (min-width: 768px) {
+            .balance-display { font-size: 4.5rem; }
+        }
+
+        .balance-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 640px) {
+            .balance-label { font-size: 1rem; }
+        }
+
+        .welcome-badge {
+            background: white;
+            color: #3b5998;
+            padding: 0.75rem 1.25rem;
+            border-radius: 1rem;
+            margin: 1.25rem 0;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 640px) {
+            .welcome-badge { font-size: 1.125rem; }
+        }
+
+        .kco-button {
+            background: linear-gradient(135deg, #FF8C42 0%, #FFA55C 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.5);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 640px) {
+            .kco-button { padding: 1rem 2.5rem; font-size: 1.25rem; }
+        }
+
+        .kco-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 140, 66, 0.6);
+        }
+
+        .kco-button:active {
+            transform: scale(0.95);
+        }
+
+        .kco-text {
+            color: #3b5998;
+            font-weight: 900;
+            font-size: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .kco-text { font-size: 1.5rem; }
+        }
+
+        .plus-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            stroke-width: 3;
+        }
+
+        @media (min-width: 640px) {
+            .plus-icon { width: 1.75rem; height: 1.75rem; }
+        }
+
+        .tip-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 640px) {
+            .tip-text { font-size: 0.875rem; }
+        }
         .profile-photo {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             border: 8px solid white;
             margin: 0 auto 20px;
@@ -76,107 +333,172 @@
             justify-content: center;
             font-size: 80px;
         }
+      
 
-        .greeting {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+   border-radius: 50%;
+}
 
-        .amount {
-            font-size: 72px;
-            font-weight: bold;
-            color: #FFE66D;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-            margin: 15px 0;
-        }
-
-        .balance-label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
-        .welcome-message {
-            background: white;
-            color: #2E5CB8;
-            padding: 15px 25px;
-            border-radius: 20px;
-            margin: 25px 0;
-            font-size: 18px;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .kco-button {
-            background: linear-gradient(135deg, #FF8C42 0%, #FFA55C 100%);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 25px;
-            font-size: 22px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+        /* Fun emojis */
+        .emoji-row {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 1.5rem;
         }
 
-        .kco-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(255, 140, 66, 0.5);
+        @media (min-width: 640px) {
+            .emoji-row { font-size: 1.875rem; }
         }
 
-        .kco-button:active {
-            transform: translateY(0);
+        .emoji-bounce {
+            animation: bounce 1s infinite;
         }
 
-        .plus-icon {
-            font-size: 28px;
-            font-weight: bold;
+        /* Animations */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 230, 109, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 230, 109, 0.6); }
+        }
+
+        @keyframes bubble-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(10px, -15px) scale(1.1); }
+            50% { transform: translate(-5px, -25px) scale(1); }
+            75% { transform: translate(15px, -10px) scale(0.9); }
+        }
+
+        @keyframes bubble-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-15px, 10px) scale(1.15); }
+            66% { transform: translate(10px, -20px) scale(0.95); }
+        }
+
+        @keyframes bubble-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -30px) scale(1.2); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.3) rotate(15deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <div class="phone-container">
-        <div class="header">
-            <div class="home-icon">🏠</div>
-            <div class="header-title">Imagine Bank</div>
-            <div class="menu-icon">☰</div>
-        </div>
-
-        <div class="profile-section">
-            <div class="profile-photo">
-                😊
-            </div>
-            
-            <div class="greeting">حياكنا</div>
-            
-            <div class="amount">1000</div>
-            
-            <div class="balance-label">رصيدك</div>
-
-            <div class="welcome-message">
-                رصيدك متاح بنك Imagine
-            </div>
+    <!-- Background orbs -->
+    <div class="bg-orbs">
+        <div class="orbs-container">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="orb orb-4"></div>
         </div>
     </div>
 
-    <script>
-        // Add click animation to KCO button
-        document.querySelector('.kco-button').addEventListener('click', function() {
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 100);
-        });
+    <!-- Stars -->
+    <div class="stars-container" id="stars"></div>
 
-        // Optional: Add hover effect to menu
-        document.querySelector('.menu-icon').addEventListener('click', function() {
-            alert('القائمة');
+    <!-- Main container -->
+    <div class="phone-container">
+        <!-- Header -->
+        <header class="header">
+            <svg class="header-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <h1 class="header-title">
+                <span style="color: #FFE66D;">✨</span>
+                Ebdaa Bank
+            </h1>
+         
+        </header>
+
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <!-- Animated bubbles -->
+            <div class="bubble bubble-1"></div>
+            <div class="bubble bubble-2"></div>
+            <div class="bubble bubble-3"></div>
+            <div class="bubble bubble-4"></div>
+            <div class="bubble bubble-5"></div>
+            
+            <!-- Sparkles -->
+            <span class="sparkle sparkle-1">✨</span>
+            <span class="sparkle sparkle-2">⭐</span>
+            <span class="sparkle sparkle-3">💫</span>
+
+            <!-- Avatar -->
+            <div class="profile-photo">
+                <img src="pic.jpeg" alt="Profile Photo">
+            </div>
+
+            <!-- Greeting -->
+            <p class="greeting" >👋يوسف نصار👋</p>
+
+            <!-- Welcome Message -->
+            <div class="welcome-badge">
+                ✨ الرصيد المتاح ✨
+            </div>
+            <!-- Balance -->
+            <div class="balance-container">
+                <p class="balance-display" id="balance">1,000+</p>
+                
+            </div>
+
+          
+        </section>
+
+    
+    </div>
+
+    <script>
+        // Create twinkling stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Balance functionality
+        let balance = 1000;
+        const balanceDisplay = document.getElementById('balance');
+        const kcoButton = document.getElementById('kcoButton');
+
+        kcoButton.addEventListener('click', function() {
+            balance += 10;
+            balanceDisplay.textContent = balance.toLocaleString();
         });
     </script>
 </body>
