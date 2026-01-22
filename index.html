@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagine Bank</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #4A90E2 0%, #7CB9E8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2E5CB8 0%, #4A7BC8 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .home-icon {
+            font-size: 28px;
+        }
+
+        .profile-section {
+            background: linear-gradient(180deg, #5BA3E8 0%, #89C4F4 100%);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 8px solid white;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .greeting {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .amount {
+            font-size: 72px;
+            font-weight: bold;
+            color: #FFE66D;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            margin: 15px 0;
+        }
+
+        .balance-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .welcome-message {
+            background: white;
+            color: #2E5CB8;
+            padding: 15px 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .kco-button {
+            background: linear-gradient(135deg, #FF8C42 0%, #FFA55C 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .kco-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 140, 66, 0.5);
+        }
+
+        .kco-button:active {
+            transform: translateY(0);
+        }
+
+        .plus-icon {
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div class="header">
+            <div class="home-icon">🏠</div>
+            <div class="header-title">Imagine Bank</div>
+            <div class="menu-icon">☰</div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-photo">
+                😊
+            </div>
+            
+            <div class="greeting">حياكنا</div>
+            
+            <div class="amount">1000</div>
+            
+            <div class="balance-label">رصيدك</div>
+
+            <div class="welcome-message">
+                رصيدك متاح بنك Imagine
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click animation to KCO button
+        document.querySelector('.kco-button').addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        // Optional: Add hover effect to menu
+        document.querySelector('.menu-icon').addEventListener('click', function() {
+            alert('القائمة');
+        });
+    </script>
+</body>
+</html>
